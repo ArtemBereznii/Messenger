@@ -1,3 +1,5 @@
+namespace Messenger.Api.Models;
+
 public class Report
 {
     public Guid Id { get; set; } = Guid.NewGuid();
