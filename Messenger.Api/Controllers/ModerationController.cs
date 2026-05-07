@@ -63,6 +63,10 @@ public class ModerationController : ControllerBase
             {
                 _context.Messages.Remove(message);
             }
+            else if (action != "DISMISS")
+            {
+                return BadRequest("Invalid action. Use HIDE, DELETE, or DISMISS.");
+            }
         }
 
         report.IsResolved = true;
@@ -73,4 +77,4 @@ public class ModerationController : ControllerBase
 }
 
 public record SubmitReportRequest(Guid ReporterId, string Reason);
-public record ResolveReportRequest(string Action); // "HIDE" or "DISMISS"
+public record ResolveReportRequest(string Action); // "HIDE"/"DELETE"/"DISMISS"
