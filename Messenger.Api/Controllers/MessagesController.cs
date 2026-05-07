@@ -52,6 +52,20 @@ public class MessagesController : ControllerBase
 
         return Ok(messages);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteMessage(Guid id)
+    {
+        var message = await _context.Messages.FindAsync(id);
+
+        if (message == null)
+            return NotFound("Message not found.");
+
+        _context.Messages.Remove(message);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }
 
 public record SendMessageRequest(Guid ConversationId, Guid SenderId, string Text);
