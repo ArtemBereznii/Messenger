@@ -2,7 +2,7 @@
 
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Messenger.Api.Models; // Ensure this matches your models namespace
+using Messenger.Api.Models;
 using Messenger.Api.Controllers;
 
 public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
@@ -11,7 +11,6 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
     public IntegrationTests(WebApplicationFactory<Program> factory)
     {
-        // This creates a client to talk to your in-memory test server
         _client = factory.CreateClient();
     }
 
