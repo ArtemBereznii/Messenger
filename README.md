@@ -51,11 +51,6 @@ Because the application uses an embedded SQLite database and includes an auto-ge
 | :--- | :--- | :--- |
 | `POST` | `/messages/{id}/report` | Submit a report for a specific message. |
 | `POST` | `/reports/{id}/resolve` | Resolve a report with actions: `HIDE`, `DELETE`, or `DISMISS`. |
-<<<<<<< HEAD
-=======
-   dotnet run
->>>>>>> 332da36 (docs: add README)
-=======
 
 ## 🏗 System Architecture
 
@@ -173,4 +168,3 @@ stateDiagram-v2
     Deleted --> [*]
     Persistent --> [*] : Read via history
 ```
->>>>>>> ec65a6f (Revise README with new system architecture diagrams)
