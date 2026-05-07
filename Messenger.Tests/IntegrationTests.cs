@@ -41,7 +41,7 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
         msgResponse.EnsureSuccessStatusCode();
 
         // 4. Retrieve Message History
-        var historyResponse = await _client.GetAsync($"/messages/conversations/{conversation.Id}/messages");
+        var historyResponse = await _client.GetAsync($"/conversations/{conversation.Id}/messages");
         historyResponse.EnsureSuccessStatusCode();
         var history = await historyResponse.Content.ReadFromJsonAsync<List<Message>>();
 

@@ -1,11 +1,12 @@
 namespace Messenger.Api.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Messenger.Api.Data;
 using Messenger.Api.Models;
 
 [ApiController]
-[Route("[controller]")]
+[Route("conversations")] 
 public class ConversationsController : ControllerBase
 {
     private readonly MessengerContext _context;
@@ -19,16 +20,23 @@ public class ConversationsController : ControllerBase
     public async Task<IActionResult> CreateConversation([FromBody] CreateConversationRequest request)
     {
         var type = string.IsNullOrWhiteSpace(request.Type) ? "direct" : request.Type;
-
-        var conversation = new Conversation
-        {
-            Type = type
-        };
+        var conversation = new Conversation { Type = type };
 
         _context.Conversations.Add(conversation);
         await _context.SaveChangesAsync();
 
         return Created($"/conversations/{conversation.Id}", conversation);
+    }
+
+    [HttpGet("{id:guid}/messages")]
+    public async Task<IActionResult> GetMessages(Guid id)
+    {
+        var messages = await _context.Messages
+            .Where(m => m.ConversationId == id && !m.IsHidden)
+            .OrderBy(m => m.CreatedAt)
+            .ToListAsync();
+
+        return Ok(messages);
     }
 }
 

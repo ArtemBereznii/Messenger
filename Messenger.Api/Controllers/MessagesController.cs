@@ -6,6 +6,7 @@ using Messenger.Api.Data;
 using Messenger.Api.Models;
 
 [ApiController]
+[Route("messages")]
 public class MessagesController : ControllerBase
 {
     private readonly MessengerContext _context;
@@ -15,7 +16,7 @@ public class MessagesController : ControllerBase
         _context = context;
     }
 
-    [HttpPost("messages")]
+    [HttpPost]
     public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Text))
@@ -27,7 +28,7 @@ public class MessagesController : ControllerBase
 
         var convExists = await _context.Conversations.AnyAsync(c => c.Id == request.ConversationId);
         if (!convExists)
-            return NotFound("Conversation does not exist. Please create one first."); // Returns a 404
+            return NotFound("Conversation does not exist. Please create one first.");
 
         var message = new Message
         {
@@ -40,17 +41,6 @@ public class MessagesController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Ok(new { messageId = message.Id });
-    }
-
-    [HttpGet("conversations/{id}/messages")]
-    public async Task<IActionResult> GetMessages(Guid id)
-    {
-        var messages = await _context.Messages
-            .Where(m => m.ConversationId == id && !m.IsHidden)
-            .OrderBy(m => m.CreatedAt)
-            .ToListAsync();
-
-        return Ok(messages);
     }
 
     [HttpDelete("{id}")]
