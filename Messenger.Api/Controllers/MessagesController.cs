@@ -27,9 +27,7 @@ public class MessagesController : ControllerBase
 
         var convExists = await _context.Conversations.AnyAsync(c => c.Id == request.ConversationId);
         if (!convExists)
-        {
-            _context.Conversations.Add(new Conversation { Id = request.ConversationId });
-        }
+            return NotFound("Conversation does not exist. Please create one first."); // Returns a 404
 
         var message = new Message
         {
