@@ -49,20 +49,26 @@ public class ModerationController : ControllerBase
         if (report.IsResolved)
             return BadRequest("This report has already been resolved.");
 
-        if (request.Action.ToUpper() == "HIDE")
+        var message = await _context.Messages.FindAsync(report.MessageId);
+        var action = request.Action.ToUpper();
+
+        if (message != null)
         {
-            var message = await _context.Messages.FindAsync(report.MessageId);
-            if (message != null)
+            if (action == "HIDE")
             {
                 message.IsHidden = true;
                 message.ModerationReason = report.Reason;
+            }
+            else if (action == "DELETE")
+            {
+                _context.Messages.Remove(message);
             }
         }
 
         report.IsResolved = true;
         await _context.SaveChangesAsync();
 
-        return Ok(new { message = $"Report resolved with action: {request.Action.ToUpper()}" });
+        return Ok(new { message = $"Report resolved with action: {action}" });
     }
 }
 
