@@ -28,6 +28,7 @@ Because the application uses an embedded SQLite database and includes an auto-ge
 2. Open a terminal in the `Messenger.Api` folder.
 3. Run the application:
    ```bash
+<<<<<<< HEAD
    dotnet run
 4. Navigate to `http://localhost:<port>/swagger` in your browser to interact with the API visually.
 
@@ -51,3 +52,6 @@ Because the application uses an embedded SQLite database and includes an auto-ge
 | :--- | :--- | :--- |
 | `POST` | `/messages/{id}/report` | Submit a report for a specific message. |
 | `POST` | `/reports/{id}/resolve` | Resolve a report with actions: `HIDE`, `DELETE`, or `DISMISS`. |
+=======
+   dotnet run
+>>>>>>> 332da36d94cdae3b74a25ad7b9149fa938569903
