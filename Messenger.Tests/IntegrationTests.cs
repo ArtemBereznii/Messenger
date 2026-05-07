@@ -32,7 +32,7 @@ public class IntegrationTests : IClassFixture<WebApplicationFactory<Program>>
 
         // 3. Send a Message
         var messageText = "Integration Test Message!";
-        var msgResponse = await _client.PostAsJsonAsync("/messages/messages", new
+        var msgResponse = await _client.PostAsJsonAsync("/messages", new
         {
             ConversationId = conversation.Id,
             SenderId = user.Id,
