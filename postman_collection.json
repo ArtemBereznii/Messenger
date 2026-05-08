@@ -1,11 +1,10 @@
 {
-  "info": {
+"info": {
     "_postman_id": "c3a6aafc-a577-4627-91b1-ce75a52e866d",
     "name": "Messenger API",
-    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "description": "### Minimal Messenger API\n\nThis collection demonstrates the complete workflow for the Lab 2 Messenger API, including strict relational entity creation and message persistence.\n\n**Included Endpoints:**\n1. **Create User:** Generates a new user and returns their UUID.\n2. **Create Conversation:** Initializes a new chat and returns its UUID.\n3. **Send Message:** Posts a message (requires valid User and Conversation IDs).\n4. **Retrieve History:** Fetches all non-deleted messages for a conversation.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54617437",
-    "_collection_link": "https://go.postman.co/collection/54617437-c3a6aafc-a577-4627-91b1-ce75a52e866d?source=collection_link"
+    "_exporter_id": "54617437"
   },
   "item": [
     {
